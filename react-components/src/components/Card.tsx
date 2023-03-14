@@ -18,9 +18,17 @@ export default class Card extends Component<Props> {
           <p className="card__descr">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem quasi necessitatibus
           </p>
-          <p className="card__author">
-            by <span>Author</span>
-          </p>
+          <div className="card__info">
+            <p>20.03.2023</p>
+            <p className="card__author">
+              by <span>Author</span>
+            </p>
+          </div>
+          <div className="card__tags">
+            <div className="tag">Graphics</div>
+            <div className="tag">Design</div>
+            <div className="tag">Inspiration</div>
+          </div>
         </div>
         <CardFooter />
       </div>

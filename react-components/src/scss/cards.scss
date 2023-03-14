@@ -23,9 +23,29 @@
     text-align: center;
   }
   &__descr {
-    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+  &__info {
+    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
     border-bottom: 1px solid #ddd;
-    margin-bottom: 16px;
+    border-top: 1px solid #ddd;
+    color: #999;
+    font-size: 14px;
+  }
+  &__tags {
+    padding-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    .tag {
+      font-size: 12px;
+      background-color: #8b7dc1;
+      color: #fff;
+      letter-spacing: 0.5px;
+      padding: 4px 6px;
+    }
   }
   &__author {
     span {
