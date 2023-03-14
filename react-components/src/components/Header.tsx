@@ -10,7 +10,7 @@ export default class Header extends Component {
             Home
           </NavLink>
           <NavLink className={({ isActive }) => (isActive ? 'active-link' : '')} to="/about">
-            About
+            About Us
           </NavLink>
         </div>
       </header>
