@@ -16,7 +16,6 @@
     "noEmit": true,
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./src",
     "jsx": "react-jsx"
   },
   "include": ["src"],
