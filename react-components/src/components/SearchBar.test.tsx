@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import SearchBar from './SearchBar';
 
-test('There is a searchbar on the home page', () => {
+test('There is a searchbar on the page', () => {
   const { getByPlaceholderText } = render(<SearchBar />);
   const input = getByPlaceholderText(/Search/);
   expect(input).toBeInTheDocument();
