@@ -9,5 +9,8 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './setupTests.ts',
+    coverage: {
+      provider: 'c8', // or 'c8'
+    },
   },
 });
