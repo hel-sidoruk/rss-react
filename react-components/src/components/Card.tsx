@@ -24,11 +24,11 @@ export default class Card extends Component<Props> {
               by <span>Author</span>
             </p>
           </div>
-          <div className="card__tags">
-            <div className="tag">Graphics</div>
-            <div className="tag">Design</div>
-            <div className="tag">Inspiration</div>
-          </div>
+          <ul className="card__tags">
+            <li className="tag">Graphics</li>
+            <li className="tag">Design</li>
+            <li className="tag">Inspiration</li>
+          </ul>
         </div>
         <CardFooter />
       </div>
