@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import CardsList from './CardsList';
+import { CardsList } from './CardsList';
 
 test('CardsList renders cards', () => {
   render(<CardsList size={6} />);

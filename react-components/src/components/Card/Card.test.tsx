@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import Card from './Card';
+import { Card } from './Card';
 
 test('Card element has an image', () => {
   const { getByRole } = render(<Card image="https://picsum.photos/id/11/300/200" />);

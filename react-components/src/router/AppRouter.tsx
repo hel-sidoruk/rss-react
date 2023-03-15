@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Home from '../pages/Home';
-import About from '../pages/About';
-import Page404 from '../pages/Page404';
 import { Routes, Route } from 'react-router-dom';
+import { About } from '../pages/About';
+import { Home } from '../pages/Home';
+import { Page404 } from '../pages/Page404';
 
 export default class AppRouter extends Component {
   render() {

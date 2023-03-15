@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Card from './Card';
+import { Card } from '../Card';
 
 type Props = { size: number };
 
-export default class CardsList extends Component<Props> {
+export class CardsList extends Component<Props> {
   constructor(props: Props) {
     super(props);
   }

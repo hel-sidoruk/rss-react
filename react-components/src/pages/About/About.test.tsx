@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import About from './About';
+import { About } from './About';
 
 test('There is text "About Us" on about page', () => {
   const { getByText } = render(<About />);

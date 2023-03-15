@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class SearchIcon extends Component {
+export class SearchIcon extends Component {
   render() {
     return (
       <svg xmlns="http://www.w3.org/2000/svg" className="searchbar__icon" viewBox="0 0 16 16">

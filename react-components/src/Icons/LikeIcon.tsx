@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class LikeIcon extends Component {
+export class LikeIcon extends Component {
   render() {
     return (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" xmlSpace="preserve">

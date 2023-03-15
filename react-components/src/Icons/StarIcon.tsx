@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class StarIcon extends Component {
+export class StarIcon extends Component {
   render() {
     return (
       <svg

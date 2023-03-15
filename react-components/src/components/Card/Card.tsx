@@ -3,7 +3,7 @@ import CardFooter from './CardFooter';
 
 type Props = { image: string };
 
-export default class Card extends Component<Props> {
+export class Card extends Component<Props> {
   constructor(props: Props) {
     super(props);
   }

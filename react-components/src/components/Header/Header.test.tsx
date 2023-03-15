@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import App from '../App';
-import Header from './Header';
+import App from '../../App';
+import { Header } from './Header';
 
 test('There are two links - Home and About - in header', () => {
   const { getByText } = render(

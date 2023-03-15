@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import SearchIcon from '../Icons/SearchIcon';
+import { SearchIcon } from '../../Icons';
 
-export default class SearchBar extends Component<object, { value: string }> {
+export class SearchBar extends Component<object, { value: string }> {
   state = { value: '' };
 
   constructor(props: object) {
