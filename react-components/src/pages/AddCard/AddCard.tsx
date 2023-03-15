@@ -6,7 +6,7 @@ export class AddCard extends Component {
   render() {
     return (
       <div className={styles.section}>
-        <div className="container">
+        <div className={`container ${styles.container}`}>
           <AddCardForm />
         </div>
       </div>

@@ -1,0 +1,54 @@
+.form {
+  background-color: #fff;
+  max-width: 600px;
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 7px 5px rgba(#000, 0.1);
+}
+.input {
+  border: 2px solid #635985;
+  border-radius: 12px;
+  padding: 10px 20px;
+  display: block;
+  width: 100%;
+  font-size: 18px;
+}
+.textarea {
+  font-family: inherit;
+  background-color: transparent;
+  height: 120px;
+  resize: none;
+}
+.fileUpload {
+  input {
+    display: none;
+  }
+}
+.fileField {
+  border: 2px dashed #635985;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  input {
+    display: none;
+  }
+}
+.btn {
+  padding: 8px 14px;
+  background-color: lighten(#635985, 15%);
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: filter .2s ease-in-out;
+  font-size: 18px;
+  &:hover {
+    filter: brightness(1.2);
+  }
+}
