@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { SearchIcon } from '../../Icons';
+import styles from './searchbar.module.scss';
 
 export class SearchBar extends Component<object, { value: string }> {
   state = { value: '' };
@@ -24,14 +25,14 @@ export class SearchBar extends Component<object, { value: string }> {
 
   render() {
     return (
-      <div className="searchbar">
+      <div className={styles.searchbar}>
         <input
           value={this.state.value}
           onChange={this.handleChange}
-          className="searchbar__input"
+          className={styles.input}
           placeholder="Search..."
         />
-        <SearchIcon />
+        <SearchIcon className={styles.icon} />
       </div>
     );
   }
