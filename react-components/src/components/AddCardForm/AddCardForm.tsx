@@ -12,8 +12,7 @@ export class AddCardForm extends Component {
         <textarea
           className={`${styles.textarea} ${styles.input}`}
           spellCheck="false"
-          id="description"
-          placeholder="Description"
+          placeholder="Text"
         />
         <FileInput />
         <Dropdown />
