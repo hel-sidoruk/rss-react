@@ -3,14 +3,17 @@ import styles from './dropdown.module.scss';
 
 const tags = ['Graphics', 'Design', 'Inspiration', 'Art', 'Modern', 'Architecture', 'Vintage'];
 
-type State = { tags: string[]; isOpened: boolean };
+type State = { isOpened: boolean };
+type Props = {
+  tags: string[];
+  changeTags: (e: React.MouseEvent<HTMLLIElement>, tag: string) => void;
+};
 
-export class Dropdown extends Component<object, State> {
-  state: State = { tags: [], isOpened: false };
+export class Dropdown extends Component<Props, State> {
+  state: State = { isOpened: false };
 
-  constructor(props: object) {
+  constructor(props: Props) {
     super(props);
-    this.changeTags = this.changeTags.bind(this);
     this.toggleOpen = this.toggleOpen.bind(this);
     this.close = this.close.bind(this);
   }
@@ -27,13 +30,6 @@ export class Dropdown extends Component<object, State> {
     this.setState({ isOpened: false });
   }
 
-  changeTags(e: React.MouseEvent<HTMLLIElement>, tag: string) {
-    e.stopPropagation();
-    this.setState(({ tags }) => ({
-      tags: tags.includes(tag) ? tags.filter((el) => el !== tag) : [...tags, tag],
-    }));
-  }
-
   toggleOpen(e: React.MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
     this.setState(({ isOpened }) => ({ isOpened: !isOpened }));
@@ -46,8 +42,8 @@ export class Dropdown extends Component<object, State> {
           className={`${styles.top} ${this.state.isOpened ? styles.opened : ''}`}
           onClick={this.toggleOpen}
         >
-          {this.state.tags.length
-            ? this.state.tags.map((el) => (
+          {this.props.tags.length
+            ? this.props.tags.map((el) => (
                 <div key={el + '1'} className={styles.tag}>
                   {el}
                 </div>
@@ -58,8 +54,8 @@ export class Dropdown extends Component<object, State> {
           {tags.map((tag) => (
             <li
               key={tag}
-              className={`${styles.item} ${this.state.tags.includes(tag) ? styles.marked : ''}`}
-              onClick={(e) => this.changeTags(e, tag)}
+              className={`${styles.item} ${this.props.tags.includes(tag) ? styles.marked : ''}`}
+              onClick={(e) => this.props.changeTags(e, tag)}
             >
               {tag}
             </li>
