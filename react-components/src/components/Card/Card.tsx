@@ -13,7 +13,7 @@ export class Card extends Component<Props> {
     return (
       <div className={styles.card}>
         <div className={styles.top}>
-          <img src={this.props.image} alt="Card image" />
+          <img src={this.props.post ? this.props.post.image : this.props.image} alt="Card image" />
         </div>
         <div className={styles.bottom}>
           <h3 className={styles.title}>{this.props.post ? this.props.post.title : 'Title'}</h3>

@@ -6,11 +6,13 @@ import { Dropdown } from '../Dropdown';
 import FileInput from './FileInput';
 import styles from './form.module.scss';
 
-export class AddCardForm extends Component<object, { tags: string[] }> {
+type State = { tags: string[]; image: string | ArrayBuffer };
+
+export class AddCardForm extends Component<object, State> {
   titleInput: React.RefObject<HTMLInputElement>;
   authorInput: React.RefObject<HTMLInputElement>;
   textInput: React.RefObject<HTMLTextAreaElement>;
-  state = { tags: [] };
+  state = { tags: [], image: '' };
   constructor(props: object) {
     super(props);
     this.titleInput = createRef();
@@ -18,6 +20,7 @@ export class AddCardForm extends Component<object, { tags: string[] }> {
     this.textInput = createRef();
     this.onSubmit = this.onSubmit.bind(this);
     this.changeTags = this.changeTags.bind(this);
+    this.changeImage = this.changeImage.bind(this);
   }
 
   onSubmit(e: React.FormEvent) {
@@ -27,6 +30,7 @@ export class AddCardForm extends Component<object, { tags: string[] }> {
       title: this.titleInput.current?.value as string,
       author: this.authorInput.current?.value as string,
       text: this.textInput.current?.value as string,
+      image: this.state.image,
       tags: this.state.tags,
       date: new Date(Date.now()).toLocaleDateString(),
     };
@@ -40,6 +44,10 @@ export class AddCardForm extends Component<object, { tags: string[] }> {
     }));
   }
 
+  changeImage(image: string | ArrayBuffer) {
+    this.setState({ image });
+  }
+
   render() {
     return (
       <form className={styles.form} onSubmit={this.onSubmit}>
@@ -51,7 +59,7 @@ export class AddCardForm extends Component<object, { tags: string[] }> {
           spellCheck="false"
           placeholder="Text"
         />
-        <FileInput />
+        <FileInput changeImage={this.changeImage} image={this.state.image} />
         <div className={styles.footer}>
           <Dropdown tags={this.state.tags} changeTags={this.changeTags} />
           <button type="submit" className={styles.btn}>

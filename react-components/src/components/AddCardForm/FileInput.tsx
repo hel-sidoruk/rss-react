@@ -1,20 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import styles from './form.module.scss';
 
-type Props = object;
+type Props = { image: string; changeImage: (s: string | ArrayBuffer) => void };
 
 export default class FileInput extends Component<Props> {
-  input: React.RefObject<HTMLInputElement>;
+  fileInput: React.RefObject<HTMLInputElement>;
   constructor(props: Props) {
     super(props);
-    this.input = React.createRef();
+    this.fileInput = createRef();
+    this.selectFile = this.selectFile.bind(this);
   }
+  readImage(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      if (e.target && e.target.result) this.props.changeImage(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  selectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) this.readImage(e.target.files[0]);
+  };
+
   render() {
     return (
       <div className={styles.fileUpload}>
-        <input ref={this.input} type="file" />
-        <div className={styles.fileField} onClick={() => this.input.current?.click()}>
+        <input onChange={this.selectFile} accept="image/*" ref={this.fileInput} type="file" />
+        <div className={styles.fileField} onClick={() => this.fileInput.current?.click()}>
           <div className={styles.btn}>Upload file</div>
+          {this.props.image && (
+            <img className="file-upload__image" src={this.props.image as string} />
+          )}
         </div>
       </div>
     );
