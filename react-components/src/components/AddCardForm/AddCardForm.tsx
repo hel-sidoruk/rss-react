@@ -17,10 +17,7 @@ export class AddCardForm extends Component<Props, State> {
     this.onSubmit = this.onSubmit.bind(this);
     this.changeTags = this.changeTags.bind(this);
     this.changeImage = this.changeImage.bind(this);
-  }
-
-  componentDidMount() {
-    if (this.state.errors.title) console.log('first');
+    this.removeError = this.removeError.bind(this);
   }
 
   onSubmit(e: React.FormEvent) {
@@ -45,6 +42,12 @@ export class AddCardForm extends Component<Props, State> {
   changeTags = (tag: string) => this.setState(({ tags }) => ({ tags: changeTags(tags, tag) }));
   changeImage = (image: string | ArrayBuffer) => this.setState({ image });
 
+  removeError = (error: keyof ErrorsState) =>
+    this.setState((state) => {
+      state.errors[error] = '';
+      return state;
+    });
+
   render() {
     return (
       <Form
@@ -57,6 +60,7 @@ export class AddCardForm extends Component<Props, State> {
         changeTags={this.changeTags}
         image={this.state.image}
         changeImage={this.changeImage}
+        removeError={this.removeError}
       />
     );
   }

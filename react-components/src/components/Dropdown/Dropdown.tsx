@@ -1,8 +1,14 @@
 import React, { Component, MouseEvent } from 'react';
+import { ErrorsState } from '../../types';
 import DropdownComponent from './DropdownComponent';
 
 type State = { isOpened: boolean };
-type Props = { tags: string[]; changeTags: (tag: string) => void };
+type Props = {
+  tags: string[];
+  changeTags: (tag: string) => void;
+  removeError: (error: keyof ErrorsState) => void;
+  error: boolean;
+};
 
 export class Dropdown extends Component<Props, State> {
   state: State = { isOpened: false };
@@ -27,6 +33,7 @@ export class Dropdown extends Component<Props, State> {
 
   changeTags(e: MouseEvent<HTMLLIElement>, tag: string) {
     e.stopPropagation();
+    if (this.props.error && !this.props.tags.length) this.props.removeError('tags');
     this.props.changeTags(tag);
   }
 

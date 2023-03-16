@@ -15,6 +15,7 @@ type Props = {
   changeImage: (image: string | ArrayBuffer) => void;
   tags: string[];
   changeTags: (tag: string) => void;
+  removeError: (error: keyof ErrorsState) => void;
 };
 
 export default class Form extends Component<Props, { errors: ErrorsState }> {
@@ -25,17 +26,37 @@ export default class Form extends Component<Props, { errors: ErrorsState }> {
     return (
       <form className={styles.form} onSubmit={this.props.onSubmit}>
         <Field error={this.props.errors.title}>
-          <input ref={this.props.titleInput} className={styles.input} placeholder="Title" />
+          <input
+            ref={this.props.titleInput}
+            onInput={() => this.props.removeError('title')}
+            className={styles.input}
+            placeholder="Title"
+          />
         </Field>
         <Field error={this.props.errors.author}>
-          <input ref={this.props.authorInput} className={styles.input} placeholder="Author" />
+          <input
+            ref={this.props.authorInput}
+            onInput={() => this.props.removeError('author')}
+            className={styles.input}
+            placeholder="Author"
+          />
         </Field>
         <Field error={this.props.errors.text}>
-          <textarea ref={this.props.textInput} className={styles.input} placeholder="Text" />
+          <textarea
+            ref={this.props.textInput}
+            onInput={() => this.props.removeError('text')}
+            className={styles.input}
+            placeholder="Text"
+          />
         </Field>
         <FileInput changeImage={this.props.changeImage} image={this.props.image} />
         <Field error={this.props.errors.tags}>
-          <Dropdown tags={this.props.tags} changeTags={this.props.changeTags} />
+          <Dropdown
+            tags={this.props.tags}
+            changeTags={this.props.changeTags}
+            removeError={this.props.removeError}
+            error={!!this.props.errors.tags}
+          />
         </Field>
         <button
           type="submit"
