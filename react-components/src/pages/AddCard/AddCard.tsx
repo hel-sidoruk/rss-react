@@ -1,30 +1,27 @@
 import React, { Component } from 'react';
 import { AddCardForm } from '../../components/AddCardForm';
 import { Posts } from '../../components/Posts';
-import { PostsContext, PostsContextType } from '../../context/PostsContext';
 import { IPost } from '../../types';
 import { posts } from '../../utils';
 import styles from './add-card.module.scss';
 
-export class AddCard extends Component<object, PostsContextType> {
-  addPost: (post: IPost | null) => void;
+export class AddCard extends Component<object, { posts: IPost[] }> {
+  state = { posts };
   constructor(props: object) {
     super(props);
-    this.addPost = (post: IPost | null) => {
-      this.setState(({ posts }) => ({ posts: post ? [...posts, post] : posts }));
-    };
-    this.state = { posts, addPost: this.addPost };
+    this.addPost = this.addPost.bind(this);
   }
+  addPost = (post: IPost) => {
+    this.setState(({ posts }) => ({ posts: [...posts, post] }));
+  };
   render() {
     return (
-      <PostsContext.Provider value={this.state}>
-        <div className={styles.section}>
-          <div className={`container ${styles.container}`}>
-            <AddCardForm />
-            <Posts />
-          </div>
+      <div className={styles.section}>
+        <div className={`container ${styles.container}`}>
+          <AddCardForm addPost={this.addPost} />
+          <Posts posts={this.state.posts} />
         </div>
-      </PostsContext.Provider>
+      </div>
     );
   }
 }

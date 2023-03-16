@@ -1,18 +1,18 @@
 import React, { Component, createRef } from 'react';
-import { PostsContext, PostsContextType } from '../../context/PostsContext';
 import { ErrorsState, IPost } from '../../types';
 import { changeTags, randomId, randomImage } from '../../utils';
 import { validate } from '../../utils/validation';
 import Form from './Form';
 
 type State = { tags: string[]; image: string | ArrayBuffer; errors: ErrorsState };
+type Props = { addPost: (post: IPost) => void };
 
-export class AddCardForm extends Component<object, State> {
+export class AddCardForm extends Component<Props, State> {
   titleInput = createRef<HTMLInputElement>();
   authorInput = createRef<HTMLInputElement>();
   textInput = createRef<HTMLTextAreaElement>();
   state = { tags: [], image: '', errors: { title: '', author: '', text: '', tags: '' } };
-  constructor(props: object) {
+  constructor(props: Props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
     this.changeTags = this.changeTags.bind(this);
@@ -37,7 +37,7 @@ export class AddCardForm extends Component<object, State> {
     const errors = validate(post);
     this.setState({ errors });
     if (Object.values(errors).some(Boolean)) return;
-    (this.context as PostsContextType).addPost(post);
+    this.props.addPost(post);
     (e.target as HTMLFormElement).reset();
     this.setState({ tags: [], image: '' });
   }
@@ -61,5 +61,3 @@ export class AddCardForm extends Component<object, State> {
     );
   }
 }
-
-AddCardForm.contextType = PostsContext;

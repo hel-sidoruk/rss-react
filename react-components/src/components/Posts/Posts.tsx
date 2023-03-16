@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import { PostsContext, PostsContextType } from '../../context/PostsContext';
+import { IPost } from '../../types';
 import { Card } from '../Card';
 import styles from './posts.module.scss';
 
-export class Posts extends Component {
+type Props = { posts: IPost[] };
+
+export class Posts extends Component<Props> {
+  constructor(props: Props) {
+    super(props);
+  }
   render() {
     return (
       <div className={styles.posts}>
-        {(this.context as PostsContextType).posts.map((post) => (
+        {this.props.posts.map((post) => (
           <Card key={post.id} post={post} />
         ))}
       </div>
     );
   }
 }
-
-Posts.contextType = PostsContext;
