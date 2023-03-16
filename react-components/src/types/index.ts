@@ -7,3 +7,4 @@ export interface IPost {
   tags: string[];
   date: string;
 }
+export type ErrorsState = { title: string; author: string; text: string; tags: string };
