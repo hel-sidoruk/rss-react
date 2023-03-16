@@ -19,6 +19,10 @@ export class AddCardForm extends Component<object, State> {
     this.changeImage = this.changeImage.bind(this);
   }
 
+  componentDidMount() {
+    if (this.state.errors.title) console.log('first');
+  }
+
   onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const post: IPost = {
