@@ -1,9 +1,9 @@
 import React, { Component, createRef } from 'react';
-import styles from './form.module.scss';
+import styles from './input.module.scss';
 
 type Props = { image: string; changeImage: (s: string | ArrayBuffer) => void };
 
-export default class FileInput extends Component<Props> {
+export class FileInput extends Component<Props> {
   fileInput: React.RefObject<HTMLInputElement>;
   constructor(props: Props) {
     super(props);
@@ -28,9 +28,7 @@ export default class FileInput extends Component<Props> {
         <input onChange={this.selectFile} accept="image/*" ref={this.fileInput} type="file" />
         <div className={styles.fileField} onClick={() => this.fileInput.current?.click()}>
           <div className={styles.btn}>Upload file</div>
-          {this.props.image && (
-            <img className="file-upload__image" src={this.props.image as string} />
-          )}
+          {this.props.image && <img src={this.props.image as string} />}
         </div>
       </div>
     );

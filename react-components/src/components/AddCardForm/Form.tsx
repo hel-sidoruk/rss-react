@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ClearErrorFn, ErrorsState } from '../../types';
 import DropdownField from './DropdownField';
 import Field from './Field';
-import FileInput from './FileInput';
+import { FileInput } from './FileInput';
 import styles from './form.module.scss';
 
 type Props = {
