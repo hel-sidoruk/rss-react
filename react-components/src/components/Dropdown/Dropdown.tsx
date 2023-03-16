@@ -1,13 +1,8 @@
-import React, { Component } from 'react';
-import styles from './dropdown.module.scss';
-
-const tags = ['Graphics', 'Design', 'Inspiration', 'Art', 'Modern', 'Architecture', 'Vintage'];
+import React, { Component, MouseEvent } from 'react';
+import DropdownComponent from './DropdownComponent';
 
 type State = { isOpened: boolean };
-type Props = {
-  tags: string[];
-  changeTags: (e: React.MouseEvent<HTMLLIElement>, tag: string) => void;
-};
+type Props = { tags: string[]; changeTags: (tag: string) => void };
 
 export class Dropdown extends Component<Props, State> {
   state: State = { isOpened: false };
@@ -16,52 +11,33 @@ export class Dropdown extends Component<Props, State> {
     super(props);
     this.toggleOpen = this.toggleOpen.bind(this);
     this.close = this.close.bind(this);
+    this.changeTags = this.changeTags.bind(this);
   }
 
-  componentDidMount() {
-    document.body.addEventListener('click', this.close);
-  }
+  componentDidMount = () => document.body.addEventListener('click', this.close);
 
-  componentWillUnmount() {
-    document.body.removeEventListener('click', this.close);
-  }
+  componentWillUnmount = () => document.body.removeEventListener('click', this.close);
 
-  close() {
-    this.setState({ isOpened: false });
-  }
+  close = () => this.setState({ isOpened: false });
 
-  toggleOpen(e: React.MouseEvent<HTMLDivElement>) {
+  toggleOpen(e: MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
     this.setState(({ isOpened }) => ({ isOpened: !isOpened }));
   }
 
+  changeTags(e: MouseEvent<HTMLLIElement>, tag: string) {
+    e.stopPropagation();
+    this.props.changeTags(tag);
+  }
+
   render() {
     return (
-      <div className={styles.dropdown}>
-        <div
-          className={`${styles.top} ${this.state.isOpened ? styles.opened : ''}`}
-          onClick={this.toggleOpen}
-        >
-          {this.props.tags.length
-            ? this.props.tags.map((el) => (
-                <div key={el + '1'} className={styles.tag}>
-                  {el}
-                </div>
-              ))
-            : 'Select tags'}
-        </div>
-        <ul className={`${styles.bottom} ${this.state.isOpened ? styles.active : ''}`}>
-          {tags.map((tag) => (
-            <li
-              key={tag}
-              className={`${styles.item} ${this.props.tags.includes(tag) ? styles.marked : ''}`}
-              onClick={(e) => this.props.changeTags(e, tag)}
-            >
-              {tag}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <DropdownComponent
+        isOpened={this.state.isOpened}
+        toggleOpen={this.toggleOpen}
+        tags={this.props.tags}
+        changeTags={this.changeTags}
+      />
     );
   }
 }

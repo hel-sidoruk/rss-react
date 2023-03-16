@@ -1,10 +1,8 @@
 import React, { Component, createRef } from 'react';
 import { PostsContext, PostsContextType } from '../../context/PostsContext';
 import { IPost } from '../../types';
-import { randomId } from '../../utils';
-import { Dropdown } from '../Dropdown';
-import FileInput from './FileInput';
-import styles from './form.module.scss';
+import { changeTags, randomId } from '../../utils';
+import Form from './Form';
 
 type State = { tags: string[]; image: string | ArrayBuffer };
 
@@ -37,36 +35,22 @@ export class AddCardForm extends Component<object, State> {
     (this.context as PostsContextType).addPost(post);
   }
 
-  changeTags(e: React.MouseEvent<HTMLLIElement>, tag: string) {
-    e.stopPropagation();
-    this.setState(({ tags }) => ({
-      tags: tags.includes(tag) ? tags.filter((el) => el !== tag) : [...tags, tag],
-    }));
-  }
+  changeTags = (tag: string) => this.setState(({ tags }) => ({ tags: changeTags(tags, tag) }));
 
-  changeImage(image: string | ArrayBuffer) {
-    this.setState({ image });
-  }
+  changeImage = (image: string | ArrayBuffer) => this.setState({ image });
 
   render() {
     return (
-      <form className={styles.form} onSubmit={this.onSubmit}>
-        <input ref={this.titleInput} className={styles.input} placeholder="Title" />
-        <input ref={this.authorInput} className={styles.input} placeholder="Your name" />
-        <textarea
-          ref={this.textInput}
-          className={`${styles.textarea} ${styles.input}`}
-          spellCheck="false"
-          placeholder="Text"
-        />
-        <FileInput changeImage={this.changeImage} image={this.state.image} />
-        <div className={styles.footer}>
-          <Dropdown tags={this.state.tags} changeTags={this.changeTags} />
-          <button type="submit" className={styles.btn}>
-            Create
-          </button>
-        </div>
-      </form>
+      <Form
+        titleInput={this.titleInput}
+        textInput={this.textInput}
+        authorInput={this.authorInput}
+        onSubmit={this.onSubmit}
+        tags={this.state.tags}
+        changeTags={this.changeTags}
+        image={this.state.image}
+        changeImage={this.changeImage}
+      />
     );
   }
 }
