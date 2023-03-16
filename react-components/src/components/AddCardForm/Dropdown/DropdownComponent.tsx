@@ -1,5 +1,5 @@
 import React, { Component, MouseEvent } from 'react';
-import { tags } from '../../utils';
+import { tags } from '../../../utils';
 import styles from './dropdown.module.scss';
 
 type Props = {

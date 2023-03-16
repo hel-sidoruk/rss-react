@@ -8,25 +8,23 @@ type State = { tags: string[]; image: string | ArrayBuffer; errors: ErrorsState 
 type Props = { addPost: (post: IPost) => void };
 
 export class AddCardForm extends Component<Props, State> {
-  titleInput = createRef<HTMLInputElement>();
-  authorInput = createRef<HTMLInputElement>();
-  textInput = createRef<HTMLTextAreaElement>();
+  formRef = createRef<HTMLFormElement>();
   state = { tags: [], image: '', errors: { title: '', author: '', text: '', tags: '' } };
   constructor(props: Props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
     this.changeTags = this.changeTags.bind(this);
     this.changeImage = this.changeImage.bind(this);
-    this.removeError = this.removeError.bind(this);
+    this.clearError = this.clearError.bind(this);
   }
 
   onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const post: IPost = {
       id: randomId(),
-      title: this.titleInput.current?.value as string,
-      author: this.authorInput.current?.value as string,
-      text: this.textInput.current?.value as string,
+      title: this.formRef.current?.['Title'].value,
+      author: this.formRef.current?.['Author'].value,
+      text: this.formRef.current?.['Text'].value,
       image: this.state.image || randomImage(),
       tags: this.state.tags,
       date: new Date(Date.now()).toLocaleDateString(),
@@ -35,14 +33,14 @@ export class AddCardForm extends Component<Props, State> {
     this.setState({ errors });
     if (Object.values(errors).some(Boolean)) return;
     this.props.addPost(post);
-    (e.target as HTMLFormElement).reset();
+    this.formRef.current?.reset();
     this.setState({ tags: [], image: '' });
   }
 
   changeTags = (tag: string) => this.setState(({ tags }) => ({ tags: changeTags(tags, tag) }));
   changeImage = (image: string | ArrayBuffer) => this.setState({ image });
 
-  removeError = (error: keyof ErrorsState) =>
+  clearError = (error: keyof ErrorsState) =>
     this.setState((state) => {
       state.errors[error] = '';
       return state;
@@ -51,16 +49,14 @@ export class AddCardForm extends Component<Props, State> {
   render() {
     return (
       <Form
+        formRef={this.formRef}
         errors={this.state.errors}
-        titleInput={this.titleInput}
-        textInput={this.textInput}
-        authorInput={this.authorInput}
         onSubmit={this.onSubmit}
         tags={this.state.tags}
         changeTags={this.changeTags}
         image={this.state.image}
         changeImage={this.changeImage}
-        removeError={this.removeError}
+        clearError={this.clearError}
       />
     );
   }

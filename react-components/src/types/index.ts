@@ -8,3 +8,4 @@ export interface IPost {
   date: string;
 }
 export type ErrorsState = { title: string; author: string; text: string; tags: string };
+export type ClearErrorFn = (error: keyof ErrorsState) => void;

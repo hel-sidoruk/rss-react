@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
-import { ErrorsState } from '../../types';
-import { Dropdown } from '../Dropdown';
+import { ClearErrorFn, ErrorsState } from '../../types';
+import DropdownField from './DropdownField';
 import Field from './Field';
 import FileInput from './FileInput';
 import styles from './form.module.scss';
 
 type Props = {
   errors: ErrorsState;
-  onSubmit: (e: React.FormEvent) => void;
-  titleInput: React.RefObject<HTMLInputElement>;
-  authorInput: React.RefObject<HTMLInputElement>;
-  textInput: React.RefObject<HTMLTextAreaElement>;
   image: string;
-  changeImage: (image: string | ArrayBuffer) => void;
   tags: string[];
+  clearError: ClearErrorFn;
+  formRef: React.RefObject<HTMLFormElement>;
+  onSubmit: (e: React.FormEvent) => void;
+  changeImage: (image: string | ArrayBuffer) => void;
   changeTags: (tag: string) => void;
-  removeError: (error: keyof ErrorsState) => void;
 };
 
 export default class Form extends Component<Props, { errors: ErrorsState }> {
@@ -24,40 +22,17 @@ export default class Form extends Component<Props, { errors: ErrorsState }> {
   }
   render() {
     return (
-      <form className={styles.form} onSubmit={this.props.onSubmit}>
-        <Field error={this.props.errors.title}>
-          <input
-            ref={this.props.titleInput}
-            onInput={() => this.props.removeError('title')}
-            className={styles.input}
-            placeholder="Title"
-          />
-        </Field>
-        <Field error={this.props.errors.author}>
-          <input
-            ref={this.props.authorInput}
-            onInput={() => this.props.removeError('author')}
-            className={styles.input}
-            placeholder="Author"
-          />
-        </Field>
-        <Field error={this.props.errors.text}>
-          <textarea
-            ref={this.props.textInput}
-            onInput={() => this.props.removeError('text')}
-            className={styles.input}
-            placeholder="Text"
-          />
-        </Field>
+      <form ref={this.props.formRef} className={styles.form} onSubmit={this.props.onSubmit}>
+        <Field error={this.props.errors['title']} id="Title" clearError={this.props.clearError} />
+        <Field error={this.props.errors['author']} id="Author" clearError={this.props.clearError} />
+        <Field error={this.props.errors['text']} id="Text" clearError={this.props.clearError} />
         <FileInput changeImage={this.props.changeImage} image={this.props.image} />
-        <Field error={this.props.errors.tags}>
-          <Dropdown
-            tags={this.props.tags}
-            changeTags={this.props.changeTags}
-            removeError={this.props.removeError}
-            error={!!this.props.errors.tags}
-          />
-        </Field>
+        <DropdownField
+          error={this.props.errors.tags}
+          change={this.props.changeTags}
+          tags={this.props.tags}
+          clearError={this.props.clearError}
+        />
         <button
           type="submit"
           className={`${styles.btn} ${
