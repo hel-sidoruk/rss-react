@@ -1,5 +1,5 @@
 .header {
-  padding: 20px 0;
+  padding: 20px;
   background-color: #635985;
   color: #f3f3f3;
   font-size: 20px;
@@ -13,4 +13,7 @@
 }
 .active {
   text-decoration: underline;
+}
+.hidden {
+  display: none;
 }

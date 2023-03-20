@@ -6,6 +6,12 @@ export class Header extends Component {
   render() {
     return (
       <header className={styles.header}>
+        <NavLink className={({ isActive }) => (!isActive ? styles.hidden : '')} to="/">
+          Home Page
+        </NavLink>
+        <NavLink className={({ isActive }) => (!isActive ? styles.hidden : '')} to="/about">
+          About Page
+        </NavLink>
         <div className={`container ${styles.container}`}>
           <NavLink className={({ isActive }) => (isActive ? styles.active : '')} to="/">
             Home
