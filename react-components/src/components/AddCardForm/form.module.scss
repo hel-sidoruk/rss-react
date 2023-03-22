@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: relative;
   border-radius: 8px;
   box-shadow: 0 0 7px 5px rgba(#000, 0.1);
 }
@@ -62,4 +63,14 @@
   pointer-events: none;
   filter: grayscale(1);
   opacity: 0.5;
+}
+
+.success {
+  background-color: #43b25b;
+  color: white;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 18px;
+  padding: 8px 14px;
 }

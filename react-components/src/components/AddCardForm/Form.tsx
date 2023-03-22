@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
-import { ClearErrorFn, ErrorsState } from '../../types';
+import { ErrorsState, FormProps } from '../../types';
 import DropdownField from './DropdownField';
 import Field from './Field';
 import { FileInput } from './FileInput';
 import styles from './form.module.scss';
 import { RadioInput } from './RadioInput';
 
-type Props = {
-  errors: ErrorsState;
-  image: string | ArrayBuffer;
-  tags: string[];
-  clearError: ClearErrorFn;
-  formRef: React.RefObject<HTMLFormElement>;
-  onSubmit: (e: React.FormEvent) => void;
-  changeImage: (image: string | ArrayBuffer) => void;
-  changeTags: (tag: string) => void;
-};
-
-export default class Form extends Component<Props, { errors: ErrorsState }> {
-  constructor(props: Props) {
+export default class Form extends Component<FormProps, { errors: ErrorsState }> {
+  constructor(props: FormProps) {
     super(props);
   }
 
@@ -47,6 +36,9 @@ export default class Form extends Component<Props, { errors: ErrorsState }> {
         <button type="submit" className={`${styles.btn} ${this.disabledClass()}`}>
           Create
         </button>
+        {this.props.success && (
+          <div className={styles.success}>The data has been saved successfully</div>
+        )}
       </form>
     );
   }
