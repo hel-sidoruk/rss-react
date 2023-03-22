@@ -65,7 +65,6 @@ export class AddCardForm extends Component<Props, State> {
         changeTags={this.changeTags}
         image={this.state.image}
         changeImage={this.changeImage}
-        clearError={this.clearError}
       />
     );
   }
