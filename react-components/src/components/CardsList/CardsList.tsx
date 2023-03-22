@@ -3,12 +3,7 @@ import { mockPosts } from '../../utils/mockPosts';
 import { Card } from '../Card';
 import styles from './cardslist.module.scss';
 
-type Props = { size: number };
-
-export class CardsList extends Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
+export class CardsList extends Component {
   render() {
     return (
       <div className={styles.list}>

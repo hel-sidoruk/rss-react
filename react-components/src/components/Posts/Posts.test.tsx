@@ -5,32 +5,26 @@ import { Posts } from './Posts';
 const posts: IPost[] = [
   {
     id: '1',
-    title: 'First post title',
-    author: 'First post author',
+    text: 'First post title',
     image: 'randomImage',
-    text: 'First post text',
     tags: ['Graphics', 'Art'],
     date: '25.03.2023',
+    gender: 'Female',
   },
   {
     id: '2',
-    title: 'Second post title',
-    author: 'Second post author',
+    text: 'Second post title',
     image: 'randomImage',
-    text: 'Second post text',
     tags: ['Graphics', 'Art'],
     date: '25.03.2023',
+    gender: 'Female',
   },
 ];
 
 test('Posts component renders cards with posts data', () => {
   const { getByText } = render(<Posts posts={posts} />);
   posts.forEach((post) => {
-    const title = getByText(post.title);
-    const author = getByText(post.author);
     const text = getByText(post.text);
-    expect(title).toBeInTheDocument();
-    expect(author).toBeInTheDocument();
     expect(text).toBeInTheDocument();
   });
 });
