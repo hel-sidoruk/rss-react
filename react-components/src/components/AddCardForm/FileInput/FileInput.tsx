@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import styles from './input.module.scss';
 
-type Props = { image: string; changeImage: (s: string | ArrayBuffer) => void };
+type Props = { image: string | ArrayBuffer; changeImage: (s: string | ArrayBuffer) => void };
 
 export class FileInput extends Component<Props> {
   fileInput: React.RefObject<HTMLInputElement> = createRef();

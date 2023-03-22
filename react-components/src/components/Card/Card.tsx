@@ -19,6 +19,7 @@ export class Card extends Component<Props> {
           <h3 className={styles.title}>{this.props.post.title}</h3>
           <div className={styles.info}>
             <p>{new Date(this.props.post?.date as string).toLocaleDateString()}</p>
+            <p>{this.props.post.gender}</p>
           </div>
           <ul className={styles.tags}>
             {this.props.post?.tags.map((tag) => (
@@ -29,6 +30,7 @@ export class Card extends Component<Props> {
           </ul>
         </div>
         <CardFooter />
+        <p>The user agreed to post this</p>
       </div>
     );
   }
