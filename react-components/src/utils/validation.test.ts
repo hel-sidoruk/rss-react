@@ -4,9 +4,7 @@ import { validate } from './validation';
 const correctPost: IPost = {
   id: '1',
   title: 'Some title',
-  author: 'Some author',
   image: 'randomImage',
-  text: 'Some text',
   tags: ['Graphics', 'Art'],
   date: '25.03.2023',
 };
@@ -14,9 +12,7 @@ const correctPost: IPost = {
 const incorrectPost: IPost = {
   id: '1',
   title: '',
-  author: '',
   image: 'randomImage',
-  text: '',
   tags: [],
   date: '25.03.2023',
 };
@@ -24,9 +20,7 @@ const incorrectPost: IPost = {
 const incorrectPost2: IPost = {
   id: '1',
   title: 'a',
-  author: 'a',
   image: 'randomImage',
-  text: 'abcde',
   tags: ['tag'],
   date: '25.03.2023',
 };

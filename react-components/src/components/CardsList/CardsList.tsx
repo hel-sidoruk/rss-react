@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { mockPosts } from '../../utils/mockPosts';
 import { Card } from '../Card';
 import styles from './cardslist.module.scss';
 
@@ -11,11 +12,9 @@ export class CardsList extends Component<Props> {
   render() {
     return (
       <div className={styles.list}>
-        {Array(this.props.size)
-          .fill('https://picsum.photos/id/')
-          .map((item, i) => (
-            <Card key={i} image={`${item}${i + 10}/300/200`} />
-          ))}
+        {mockPosts.map((post) => (
+          <Card key={post.id} post={post} />
+        ))}
       </div>
     );
   }

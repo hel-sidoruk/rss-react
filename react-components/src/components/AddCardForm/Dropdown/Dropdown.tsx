@@ -12,30 +12,25 @@ type Props = {
 
 export class Dropdown extends Component<Props, State> {
   state: State = { isOpened: false };
-
   constructor(props: Props) {
     super(props);
-    this.toggleOpen = this.toggleOpen.bind(this);
-    this.close = this.close.bind(this);
-    this.changeTags = this.changeTags.bind(this);
   }
 
   componentDidMount = () => document.body.addEventListener('click', this.close);
-
   componentWillUnmount = () => document.body.removeEventListener('click', this.close);
 
   close = () => this.setState({ isOpened: false });
 
-  toggleOpen(e: MouseEvent<HTMLDivElement>) {
+  toggleOpen = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     this.setState(({ isOpened }) => ({ isOpened: !isOpened }));
-  }
+  };
 
-  changeTags(e: MouseEvent<HTMLLIElement>, tag: string) {
+  changeTags = (e: MouseEvent<HTMLLIElement>, tag: string) => {
     e.stopPropagation();
     if (this.props.error && !this.props.tags.length) this.props.clearError('tags');
     this.props.changeTags(tag);
-  }
+  };
 
   render() {
     return (

@@ -12,21 +12,17 @@ export class AddCardForm extends Component<Props, State> {
   state = { tags: [], image: '', errors: { title: '', text: '', tags: '' } };
   constructor(props: Props) {
     super(props);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.changeTags = this.changeTags.bind(this);
-    this.changeImage = this.changeImage.bind(this);
-    this.clearError = this.clearError.bind(this);
   }
 
-  onSubmit(e: React.FormEvent) {
+  onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(this.formRef.current?.['Check'].checked);
     const post: IPost = {
       id: randomId(),
       title: this.formRef.current?.['Title'].value,
-      text: this.formRef.current?.['Text'].value,
+      date: this.formRef.current?.['Date'].value,
       image: this.state.image || randomImage(),
       tags: this.state.tags,
-      date: new Date(Date.now()).toLocaleDateString(),
     };
     const errors = validate(post);
     this.setState({ errors });
@@ -34,7 +30,7 @@ export class AddCardForm extends Component<Props, State> {
     this.props.addPost(post);
     this.formRef.current?.reset();
     this.setState({ tags: [], image: '' });
-  }
+  };
 
   changeTags = (tag: string) => this.setState(({ tags }) => ({ tags: changeTags(tags, tag) }));
   changeImage = (image: string | ArrayBuffer) => this.setState({ image });

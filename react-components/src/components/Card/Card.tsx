@@ -3,7 +3,7 @@ import CardFooter from './CardFooter';
 import styles from './card.module.scss';
 import { IPost } from '../../types';
 
-type Props = { image?: string; post?: IPost };
+type Props = { post: IPost };
 
 export class Card extends Component<Props> {
   constructor(props: Props) {
@@ -13,17 +13,12 @@ export class Card extends Component<Props> {
     return (
       <div className={styles.card}>
         <div className={styles.top}>
-          <img src={this.props.post ? this.props.post.image : this.props.image} alt="Card image" />
+          <img src={this.props.post.image} alt="Card image" />
         </div>
         <div className={styles.bottom}>
-          <h3 className={styles.title}>{this.props.post ? this.props.post.title : 'Title'}</h3>
-          <p className={styles.descr}>
-            {this.props.post
-              ? this.props.post.text
-              : 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem quasi necessitatibus'}
-          </p>
+          <h3 className={styles.title}>{this.props.post.title}</h3>
           <div className={styles.info}>
-            <p>{this.props.post?.date}</p>
+            <p>{new Date(this.props.post?.date as string).toLocaleDateString()}</p>
           </div>
           <ul className={styles.tags}>
             {this.props.post?.tags.map((tag) => (

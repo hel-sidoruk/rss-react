@@ -4,11 +4,9 @@ import styles from './input.module.scss';
 type Props = { image: string; changeImage: (s: string | ArrayBuffer) => void };
 
 export class FileInput extends Component<Props> {
-  fileInput: React.RefObject<HTMLInputElement>;
+  fileInput: React.RefObject<HTMLInputElement> = createRef();
   constructor(props: Props) {
     super(props);
-    this.fileInput = createRef();
-    this.selectFile = this.selectFile.bind(this);
   }
   readImage(file: File) {
     const reader = new FileReader();

@@ -6,10 +6,7 @@ import styles from './add-card.module.scss';
 
 export class AddCard extends Component<object, { posts: IPost[] }> {
   state = { posts: [] };
-  constructor(props: object) {
-    super(props);
-    this.addPost = this.addPost.bind(this);
-  }
+
   addPost = (post: IPost) => this.setState(({ posts }) => ({ posts: [...posts, post] }));
   render() {
     return (
