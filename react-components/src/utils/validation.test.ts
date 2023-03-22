@@ -3,7 +3,7 @@ import { validate } from './validation';
 
 const correctPost: IPost = {
   id: '1',
-  title: 'Some title',
+  text: 'Some title',
   image: 'randomImage',
   tags: ['Graphics', 'Art'],
   date: '25.03.2023',
@@ -12,7 +12,7 @@ const correctPost: IPost = {
 
 const incorrectPost: IPost = {
   id: '1',
-  title: '',
+  text: '',
   image: 'randomImage',
   tags: [],
   date: '25.03.2023',
@@ -21,7 +21,7 @@ const incorrectPost: IPost = {
 
 const incorrectPost2: IPost = {
   id: '1',
-  title: 'a',
+  text: 'a',
   image: 'randomImage',
   tags: ['tag'],
   date: '25.03.2023',

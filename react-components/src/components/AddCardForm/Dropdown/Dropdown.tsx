@@ -1,12 +1,10 @@
 import React, { Component, MouseEvent } from 'react';
-import { ErrorsState } from '../../../types';
 import DropdownComponent from './DropdownComponent';
 
 type State = { isOpened: boolean };
 type Props = {
   tags: string[];
   changeTags: (tag: string) => void;
-  clearError: (error: keyof ErrorsState) => void;
   error: boolean;
 };
 

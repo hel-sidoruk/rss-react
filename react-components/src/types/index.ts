@@ -1,13 +1,13 @@
 export interface IPost {
   id: string;
-  title: string;
+  text: string;
   image: string;
   tags: string[];
   date: string;
   gender: 'Female' | 'Male' | '';
 }
 export type ErrorsState = {
-  title: string;
+  text: string;
   tags: string;
   date: string;
   image: string;

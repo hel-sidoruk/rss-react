@@ -12,8 +12,9 @@ export class AddCardForm extends Component<Props, State> {
   state: State = {
     tags: [],
     image: '',
-    errors: { title: '', tags: '', date: '', image: '', check: '', gender: '' },
+    errors: { text: '', tags: '', date: '', image: '', check: '', gender: '' },
   };
+
   constructor(props: Props) {
     super(props);
   }
@@ -22,8 +23,8 @@ export class AddCardForm extends Component<Props, State> {
     e.preventDefault();
     const post: IPost = {
       id: randomId(),
-      title: this.formRef.current?.['Title'].value,
-      date: this.formRef.current?.['Date'].value,
+      text: this.formRef.current?.['text'].value,
+      date: this.formRef.current?.['date'].value,
       image: this.state.image as string,
       tags: this.state.tags,
       gender: this.formRef.current?.['female'].checked
@@ -32,7 +33,7 @@ export class AddCardForm extends Component<Props, State> {
         ? 'Male'
         : '',
     };
-    const errors = validate(post, this.formRef.current?.['Check'].checked);
+    const errors = validate(post, this.formRef.current?.['check'].checked);
     this.setState({ errors });
     if (Object.values(errors).some(Boolean)) return;
     this.props.addPost(post);

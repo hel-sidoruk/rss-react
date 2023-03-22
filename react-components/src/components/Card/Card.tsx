@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import CardFooter from './CardFooter';
 import styles from './card.module.scss';
 import { IPost } from '../../types';
 
@@ -16,7 +15,7 @@ export class Card extends Component<Props> {
           <img src={this.props.post.image} alt="Card image" />
         </div>
         <div className={styles.bottom}>
-          <h3 className={styles.title}>{this.props.post.title}</h3>
+          <h3 className={styles.title}>{this.props.post.text}</h3>
           <div className={styles.info}>
             <p>{new Date(this.props.post?.date as string).toLocaleDateString()}</p>
             <p>{this.props.post.gender}</p>
@@ -28,9 +27,8 @@ export class Card extends Component<Props> {
               </li>
             ))}
           </ul>
+          <p>The user agreed to post this</p>
         </div>
-        <CardFooter />
-        <p>The user agreed to post this</p>
       </div>
     );
   }
