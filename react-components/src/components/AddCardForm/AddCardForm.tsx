@@ -9,7 +9,7 @@ type Props = { addPost: (post: IPost) => void };
 
 export class AddCardForm extends Component<Props, State> {
   formRef = createRef<HTMLFormElement>();
-  state = { tags: [], image: '', errors: { title: '', author: '', text: '', tags: '' } };
+  state = { tags: [], image: '', errors: { title: '', text: '', tags: '' } };
   constructor(props: Props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -23,7 +23,6 @@ export class AddCardForm extends Component<Props, State> {
     const post: IPost = {
       id: randomId(),
       title: this.formRef.current?.['Title'].value,
-      author: this.formRef.current?.['Author'].value,
       text: this.formRef.current?.['Text'].value,
       image: this.state.image || randomImage(),
       tags: this.state.tags,

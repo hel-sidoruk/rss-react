@@ -24,7 +24,6 @@ export default class Form extends Component<Props, { errors: ErrorsState }> {
     return (
       <form ref={this.props.formRef} className={styles.form} onSubmit={this.props.onSubmit}>
         <Field error={this.props.errors['title']} id="Title" clearError={this.props.clearError} />
-        <Field error={this.props.errors['author']} id="Author" clearError={this.props.clearError} />
         <Field error={this.props.errors['text']} id="Text" clearError={this.props.clearError} />
         <FileInput changeImage={this.props.changeImage} image={this.props.image} />
         <DropdownField

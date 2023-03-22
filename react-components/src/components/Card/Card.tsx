@@ -24,9 +24,6 @@ export class Card extends Component<Props> {
           </p>
           <div className={styles.info}>
             <p>{this.props.post?.date}</p>
-            <p className={styles.author}>
-              by <span>{this.props.post ? this.props.post.author : 'Author'}</span>
-            </p>
           </div>
           <ul className={styles.tags}>
             {this.props.post?.tags.map((tag) => (

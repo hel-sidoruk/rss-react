@@ -10,10 +10,10 @@ export class Header extends Component {
       <header className={styles.header}>
         <div className={`container ${styles.container}`}>
           <NavLink className={this.toggleClass} to="/">
-            Home
+            Forms
           </NavLink>
-          <NavLink className={this.toggleClass} to="/add-card">
-            Add Card
+          <NavLink className={this.toggleClass} to="/home">
+            Home
           </NavLink>
           <NavLink className={this.toggleClass} to="/about">
             About Us

@@ -9,9 +9,9 @@ export default class AppRouter extends Component {
   render() {
     return (
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<AddCard />} />
         <Route path="/about" element={<About />} />
-        <Route path="/add-card" element={<AddCard />} />
+        <Route path="/home" element={<Home />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
     );
