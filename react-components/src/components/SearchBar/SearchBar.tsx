@@ -1,33 +1,27 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SearchIcon } from '../../Icons';
 import styles from './searchbar.module.scss';
 
-export class SearchBar extends Component<object, { value: string }> {
-  state = { value: '' };
+export const SearchBar = () => {
+  const [value, setValue] = useState('');
 
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    this.setState({ value: e.target.value });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
 
-  componentDidMount() {
+  useEffect(() => {
     const searchbarValue = localStorage.getItem('searchbarValue');
-    if (searchbarValue) this.setState({ value: searchbarValue });
-  }
+    if (searchbarValue) setValue(searchbarValue);
+    return () => localStorage.setItem('searchbarValue', value);
+  }, []);
 
-  componentWillUnmount() {
-    localStorage.setItem('searchbarValue', this.state.value);
-  }
-
-  render() {
-    return (
-      <div className={styles.searchbar}>
-        <input
-          value={this.state.value}
-          onChange={this.handleChange}
-          className={styles.input}
-          placeholder="Search..."
-        />
-        <SearchIcon className={styles.icon} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.searchbar}>
+      <input
+        value={value}
+        onChange={handleChange}
+        className={styles.input}
+        placeholder="Search..."
+      />
+      <SearchIcon className={styles.icon} />
+    </div>
+  );
+};
