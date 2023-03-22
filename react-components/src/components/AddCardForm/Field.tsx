@@ -8,13 +8,14 @@ export default class Field extends Component<Props> {
   constructor(props: Props) {
     super(props);
   }
+  clearError = () => this.props.clearError(this.props.id.toLowerCase() as keyof ErrorsState);
   render() {
     return (
       <div className={styles.field}>
         <input
-          id={this.props.id}
-          onInput={() => this.props.clearError(this.props.id.toLowerCase() as keyof ErrorsState)}
           className={styles.input}
+          id={this.props.id}
+          onInput={this.clearError}
           placeholder={this.props.id}
         />
         <p>{this.props.error}</p>

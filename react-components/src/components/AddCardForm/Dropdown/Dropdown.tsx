@@ -28,7 +28,6 @@ export class Dropdown extends Component<Props, State> {
 
   changeTags = (e: MouseEvent<HTMLLIElement>, tag: string) => {
     e.stopPropagation();
-    if (this.props.error && !this.props.tags.length) this.props.clearError('tags');
     this.props.changeTags(tag);
   };
 

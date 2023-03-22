@@ -25,7 +25,12 @@ export default class Form extends Component<Props, { errors: ErrorsState }> {
       <form ref={this.props.formRef} className={styles.form} onSubmit={this.props.onSubmit}>
         <Field error={this.props.errors['title']} id="Title" clearError={this.props.clearError} />
         <div className={styles.field}>
-          <input className={styles.input} type="date" id="Date" />
+          <input
+            onInput={() => this.props.clearError('date')}
+            className={styles.input}
+            type="date"
+            id="Date"
+          />
           <p>{this.props.errors.date}</p>
         </div>
         <div className={styles.field}>
@@ -39,14 +44,24 @@ export default class Form extends Component<Props, { errors: ErrorsState }> {
           clearError={this.props.clearError}
         />
         <div className={styles.field}>
-          <input id="female" type="radio" name="question" />
+          <input
+            onChange={() => this.props.clearError('gender')}
+            id="female"
+            type="radio"
+            name="question"
+          />
           <label htmlFor="female">Female</label>
-          <input id="male" type="radio" name="question" />
+          <input
+            onChange={() => this.props.clearError('gender')}
+            id="male"
+            type="radio"
+            name="question"
+          />
           <label htmlFor="male">Male</label>
           <p>{this.props.errors.gender}</p>
         </div>
         <div className={styles.field}>
-          <input type="checkbox" id="Check" />
+          <input onChange={() => this.props.clearError('check')} type="checkbox" id="Check" />
           <label htmlFor="Check">I agree to publish this data</label>
           <p>{this.props.errors.check}</p>
         </div>

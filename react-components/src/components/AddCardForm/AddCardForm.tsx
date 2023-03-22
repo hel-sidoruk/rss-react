@@ -40,8 +40,14 @@ export class AddCardForm extends Component<Props, State> {
     this.setState({ tags: [], image: '' });
   };
 
-  changeTags = (tag: string) => this.setState(({ tags }) => ({ tags: changeTags(tags, tag) }));
-  changeImage = (image: string | ArrayBuffer) => this.setState({ image });
+  changeTags = (tag: string) => {
+    if (this.state.errors.tags && !this.state.tags.length) this.clearError('tags');
+    this.setState(({ tags }) => ({ tags: changeTags(tags, tag) }));
+  };
+  changeImage = (image: string | ArrayBuffer) => {
+    if (this.state.errors.image) this.clearError('image');
+    this.setState({ image });
+  };
 
   clearError = (error: keyof ErrorsState) =>
     this.setState((state) => {
