@@ -6,7 +6,7 @@ const post: IPost = {
   id: '1',
   text: 'Some title',
   image: 'randomImage',
-  tags: ['Graphics', 'Art'],
+  tag: 'Graphics',
   date: '25.03.2023',
   gender: 'Female',
 };
