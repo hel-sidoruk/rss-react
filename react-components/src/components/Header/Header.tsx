@@ -7,13 +7,13 @@ export const Header = () => {
     <header className={styles.header}>
       <div className={`container ${styles.container}`}>
         <NavLink className={toggleClass} to="/">
-          Forms
-        </NavLink>
-        <NavLink className={toggleClass} to="/home">
           Home
         </NavLink>
         <NavLink className={toggleClass} to="/about">
           About Us
+        </NavLink>
+        <NavLink className={toggleClass} to="/add">
+          Forms
         </NavLink>
       </div>
     </header>
