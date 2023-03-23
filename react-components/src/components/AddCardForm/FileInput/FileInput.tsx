@@ -5,7 +5,7 @@ type Props = { watcher: FileList; reg: UseFormRegisterReturn<'file'>; error?: Fi
 
 export const FileInput = ({ watcher, reg, error }: Props) => {
   return (
-    <div className={styles.field}>
+    <div className="field">
       <div className={styles.fileUpload}>
         <input {...reg} accept="image/*" type="file" />
         <div className={styles.fileField}>

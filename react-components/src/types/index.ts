@@ -32,4 +32,5 @@ export interface IForm {
   gender: 'Male' | 'Female';
   check: boolean;
   file: FileList;
+  tags: string[];
 }

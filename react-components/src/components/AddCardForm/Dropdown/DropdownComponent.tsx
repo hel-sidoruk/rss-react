@@ -1,12 +1,13 @@
 import React, { MouseEvent } from 'react';
-import { mockTags } from '../../../utils';
+import { ControllerRenderProps } from 'react-hook-form';
+import { IForm } from '../../../types';
+import { changeTags, mockTags } from '../../../utils';
 import styles from './dropdown.module.scss';
 
 type Props = {
+  field: ControllerRenderProps<IForm, 'tags'>;
   isOpened: boolean;
   toggle: (e: MouseEvent<HTMLDivElement>) => void;
-  tags: string[];
-  onChange: (e: MouseEvent<HTMLLIElement>, tag: string) => void;
 };
 
 const tag = (el: string) => (
@@ -15,17 +16,22 @@ const tag = (el: string) => (
   </div>
 );
 
-export const DropdownComponent = ({ isOpened, toggle, tags, onChange }: Props) => {
+export const DropdownComponent = ({ field, isOpened, toggle }: Props) => {
+  const onChange = (e: MouseEvent<HTMLLIElement>, tag: string) => {
+    e.stopPropagation();
+    field.onChange(changeTags(field.value, tag));
+  };
+
   return (
     <div className={styles.dropdown}>
       <div className={`${styles.top} ${isOpened ? styles.opened : ''}`} onClick={toggle}>
-        {tags.length ? tags.map(tag) : 'Select tags'}
+        {field.value.length ? field.value.map(tag) : 'Select tags'}
       </div>
       <ul className={`${styles.bottom} ${isOpened ? styles.active : ''}`}>
         {mockTags.map((tag) => (
           <li
             key={tag}
-            className={`${styles.item} ${tags.includes(tag) ? styles.marked : ''}`}
+            className={`${styles.item} ${field.value.includes(tag) ? styles.marked : ''}`}
             onClick={(e) => onChange(e, tag)}
           >
             {tag}
