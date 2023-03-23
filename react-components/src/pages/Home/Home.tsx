@@ -9,7 +9,7 @@ export class Home extends Component {
       <div className={styles.home}>
         <div className={`container ${styles.container}`}>
           <SearchBar />
-          <CardsList size={15} />
+          <CardsList />
         </div>
       </div>
     );
