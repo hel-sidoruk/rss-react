@@ -5,26 +5,26 @@ export interface ApiResponse {
     next: string | null;
     prev: string | null;
   };
-  results: [
-    {
-      id: number;
-      name: string;
-      status: string;
-      species: string;
-      type: '';
-      gender: string;
-      origin: {
-        name: string;
-        url: string;
-      };
-      location: {
-        name: string;
-        url: string;
-      };
-      image: string;
-      episode: string[];
-      url: string;
-      created: string;
-    }
-  ];
+  results: ICharacter[];
+}
+
+export interface ICharacter {
+  id: number;
+  name: string;
+  status: string;
+  species: string;
+  type: '';
+  gender: string;
+  origin: {
+    name: string;
+    url: string;
+  };
+  location: {
+    name: string;
+    url: string;
+  };
+  image: string;
+  episode: string[];
+  url: string;
+  created: string;
 }

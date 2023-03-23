@@ -1,21 +1,28 @@
-import { useEffect } from 'react';
-import { CardsList } from '../../components/CardsList';
+import { useEffect, useState } from 'react';
+import { CharacterItem } from '../../components/CharacterItem';
 import { SearchBar } from '../../components/SearchBar';
+import { ApiResponse, ICharacter } from '../../types/api';
 import styles from './home.module.scss';
 
 export const Home = () => {
+  const [data, setData] = useState<ICharacter[]>([]);
+
   useEffect(() => {
     fetch('https://rickandmortyapi.com/api/character')
       .then((res) => res.json())
-      .then(console.log);
+      .then((res: ApiResponse) => setData(res.results));
   }, []);
 
   return (
-    <div className={styles.home}>
+    <section className={styles.home}>
       <div className={`container ${styles.container}`}>
         <SearchBar />
-        <CardsList />
+        <div className={styles.list}>
+          {data.map((item) => (
+            <CharacterItem key={item.id} item={item} />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
