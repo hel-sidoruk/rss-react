@@ -9,7 +9,7 @@ type Props = { addPost: (post: IPost) => void };
 
 export class AddCardForm extends Component<Props, State> {
   formRef = createRef<HTMLFormElement>();
-  state: State = { image: '', success: false, errors: initialErrors };
+  state: State = { image: '', success: false, errors: { ...initialErrors } };
 
   onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
