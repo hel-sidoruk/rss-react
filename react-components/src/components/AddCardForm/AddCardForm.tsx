@@ -1,43 +1,19 @@
-import { useState } from 'react';
-import { IForm, IPost } from '../../types';
-import { randomId } from '../../utils';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { IPost } from '../../types';
 import styles from './form.module.scss';
 import { FileInput } from './FileInput';
 import { RadioInput } from './RadioInput';
 import { Dropdown } from './Dropdown';
+import { useAddCardForm } from '../../hooks/useAddCardForm';
 
 type Props = { addPost: (post: IPost) => void };
 
 export const AddCardForm = ({ addPost }: Props) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-    watch,
-    control,
-  } = useForm<IForm>();
-  const [success, setSuccess] = useState(false);
+  const [onSubmit, success, errors, control, fileWatch, inputs] = useAddCardForm(addPost);
 
-  const fileWatch = watch('file');
-  const fileInput = register('file', { required: true });
-  const radioInput = register('gender', { required: true });
-  const dateInput = register('date', { required: true });
-  const textInput = register('text', { required: true });
-
-  const onSubmit: SubmitHandler<IForm> = (data) => {
-    const file = data.file[0];
-    const image = URL.createObjectURL(file);
-    const post: IPost = { id: randomId(), ...data, image };
-    reset();
-    addPost(post);
-    setSuccess(true);
-    setTimeout(() => setSuccess(false), 2000);
-  };
+  const { textInput, dateInput, fileInput, radioInput, checkInput } = inputs;
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles.form} onSubmit={onSubmit}>
       <div className="field">
         <input className={styles.input} placeholder="Title" {...textInput} />
         {errors.text && <p>The title is required</p>}
@@ -50,7 +26,7 @@ export const AddCardForm = ({ addPost }: Props) => {
       <Dropdown control={control} error={errors.tags} />
       <RadioInput reg={radioInput} error={errors.gender} />
       <div className="field">
-        <input id="check" type="checkbox" {...register('check', { required: true })} />
+        <input id="check" type="checkbox" {...checkInput} />
         <label htmlFor="check">I agree to publish this data</label>
         {errors.check && <p>You should agree to post this</p>}
       </div>
