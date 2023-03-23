@@ -1,31 +1,19 @@
-import React, { useRef } from 'react';
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 import styles from './input.module.scss';
 
-type Props = { image: string | ArrayBuffer; changeImage: (s: string | ArrayBuffer) => void };
+type Props = { watcher: FileList; reg: UseFormRegisterReturn<'file'>; error?: FieldError };
 
-export const FileInput = ({ image, changeImage }: Props) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const readImage = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      if (e.target && e.target.result) changeImage(e.target.result);
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const selectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.target.files && readImage(e.target.files[0]);
-  };
-
-  const click = () => inputRef.current?.click();
+export const FileInput = ({ watcher, reg, error }: Props) => {
   return (
-    <div className={styles.fileUpload}>
-      <input onChange={selectFile} accept="image/*" ref={inputRef} type="file" />
-      <div className={styles.fileField} onClick={click}>
-        <div className={styles.btn}>Upload file</div>
-        {image && <img src={image as string} />}
+    <div className={styles.field}>
+      <div className={styles.fileUpload}>
+        <input {...reg} accept="image/*" type="file" />
+        <div className={styles.fileField}>
+          <div className={styles.btn}>Upload file</div>
+          {watcher && watcher[0] && <img src={URL.createObjectURL(watcher[0])} />}
+        </div>
       </div>
+      {error && <p>Please, select </p>}
     </div>
   );
 };

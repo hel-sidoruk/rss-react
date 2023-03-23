@@ -25,26 +25,6 @@
   width: 100%;
   font-size: 18px;
 }
-.fileUpload {
-  input {
-    display: none;
-  }
-}
-.fileField {
-  border: 2px dashed #635985;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80px;
-  gap: 12px;
-  input {
-    display: none;
-  }
-  img {
-    max-height: 70px;
-  }
-}
 .btn {
   padding: 8px 14px;
   background-color: lighten(#635985, 15%);

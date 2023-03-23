@@ -25,3 +25,11 @@ export type FormProps = {
   changeImage: (image: string | ArrayBuffer) => void;
   changeTags: (tag: string) => void;
 };
+
+export interface IForm {
+  text: string;
+  date: string;
+  gender: 'Male' | 'Female';
+  check: boolean;
+  file: FileList;
+}

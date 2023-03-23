@@ -1,13 +1,16 @@
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 import styles from './radio-input.module.scss';
 
-export const RadioInput = ({ error }: { error: string }) => {
+type Props = { reg: UseFormRegisterReturn<'gender'>; error?: FieldError };
+
+export const RadioInput = ({ reg, error }: Props) => {
   return (
     <div className={styles.field}>
-      <input id="female" type="radio" name="question" />
+      <input {...reg} id="female" value="Female" type="radio" />
       <label htmlFor="female">Female</label>
-      <input id="male" type="radio" name="question" />
+      <input {...reg} id="male" value="Male" type="radio" />
       <label htmlFor="male">Male</label>
-      <p>{error}</p>
+      {error && <p>Please, select your gender</p>}
     </div>
   );
 };
