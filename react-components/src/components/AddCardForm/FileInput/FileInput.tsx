@@ -5,9 +5,7 @@ type Props = { image: string | ArrayBuffer; changeImage: (s: string | ArrayBuffe
 
 export class FileInput extends Component<Props> {
   fileInput: React.RefObject<HTMLInputElement> = createRef();
-  constructor(props: Props) {
-    super(props);
-  }
+
   readImage(file: File) {
     const reader = new FileReader();
     reader.onload = (e) => {

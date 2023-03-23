@@ -1,4 +1,4 @@
-import { changeTags, randomId, randomImage } from '.';
+import { randomId, randomImage } from '.';
 
 describe('randomID function works correctly', () => {
   const id1 = randomId();
@@ -22,24 +22,5 @@ describe('randomImage function works correctly', () => {
   });
   test('Function returns an URL', () => {
     expect(image.startsWith('http')).toBe(true);
-  });
-});
-
-describe('changeTags function works correctly', () => {
-  test('Function returns array', () => {
-    const result = changeTags([], 'tag');
-    expect(Array.isArray(result)).toBe(true);
-  });
-  test('Function adds tag in array, if there is no such tag in it', () => {
-    const array = ['string'];
-    const tag = 'tag';
-    const result = changeTags(array, tag);
-    expect(result.includes(tag)).toBe(true);
-  });
-  test('Function removes tag from array, if there is such tag in it', () => {
-    const tag = 'tag';
-    const array = [tag];
-    const result = changeTags(array, tag);
-    expect(result.includes(tag)).toBe(false);
   });
 });

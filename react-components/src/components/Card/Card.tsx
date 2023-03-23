@@ -21,11 +21,7 @@ export class Card extends Component<Props> {
             <p>{this.props.post.gender}</p>
           </div>
           <ul className={styles.tags}>
-            {this.props.post?.tags.map((tag) => (
-              <li key={this.props.post?.id + tag} className={styles.tag}>
-                {tag}
-              </li>
-            ))}
+            <li className={styles.tag}>{this.props.post?.tag}</li>
           </ul>
           <p>The user agreed to post this</p>
         </div>

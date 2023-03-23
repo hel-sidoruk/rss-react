@@ -6,7 +6,7 @@ export const mockPosts: IPost[] = [
     id: '1',
     text: 'Some title',
     image: randomImage(),
-    tags: ['Graphics', 'Art'],
+    tag: 'Graphics',
     date: '2023-03-09',
     gender: 'Male',
   },

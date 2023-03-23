@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { ErrorsState, FormProps } from '../../types';
-import DropdownField from './DropdownField';
+import { Dropdown } from './Dropdown';
 import Field from './Field';
 import { FileInput } from './FileInput';
 import styles from './form.module.scss';
 import { RadioInput } from './RadioInput';
 
 export default class Form extends Component<FormProps, { errors: ErrorsState }> {
-  constructor(props: FormProps) {
-    super(props);
-  }
-
   render() {
     return (
       <form ref={this.props.formRef} className={styles.form} onSubmit={this.props.onSubmit}>
@@ -20,11 +16,7 @@ export default class Form extends Component<FormProps, { errors: ErrorsState }> 
           <FileInput changeImage={this.props.changeImage} image={this.props.image} />
           <p>{this.props.errors.image}</p>
         </div>
-        <DropdownField
-          error={this.props.errors.tags}
-          change={this.props.changeTags}
-          tags={this.props.tags}
-        />
+        <Dropdown error={this.props.errors.tag} />
         <RadioInput error={this.props.errors.gender} />
         <div className={styles.field}>
           <input type="checkbox" id="check" />

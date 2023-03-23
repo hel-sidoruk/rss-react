@@ -1,24 +1,15 @@
 import React, { Component, createRef } from 'react';
 import { ErrorsState, IPost } from '../../types';
-import { changeTags, randomId } from '../../utils';
+import { initialErrors, randomId } from '../../utils';
 import { validate } from '../../utils/validation';
 import Form from './Form';
 
-type State = { tags: string[]; image: string | ArrayBuffer; errors: ErrorsState; success: boolean };
+type State = { image: string | ArrayBuffer; errors: ErrorsState; success: boolean };
 type Props = { addPost: (post: IPost) => void };
 
 export class AddCardForm extends Component<Props, State> {
   formRef = createRef<HTMLFormElement>();
-  state: State = {
-    tags: [],
-    image: '',
-    success: false,
-    errors: { text: '', tags: '', date: '', image: '', check: '', gender: '' },
-  };
-
-  constructor(props: Props) {
-    super(props);
-  }
+  state: State = { image: '', success: false, errors: initialErrors };
 
   onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +18,7 @@ export class AddCardForm extends Component<Props, State> {
       text: this.formRef.current?.['text'].value,
       date: this.formRef.current?.['date'].value,
       image: this.state.image as string,
-      tags: this.state.tags,
+      tag: this.formRef.current?.['dropdown'].value,
       gender: this.formRef.current?.['female'].checked
         ? 'Female'
         : this.formRef.current?.['male'].checked
@@ -39,13 +30,10 @@ export class AddCardForm extends Component<Props, State> {
     if (Object.values(errors).some(Boolean)) return;
     this.props.addPost(post);
     this.formRef.current?.reset();
-    this.setState({ tags: [], image: '', success: true });
-    setTimeout(() => {
-      this.setState({ success: false });
-    }, 3000);
+    this.setState({ image: '', success: true });
+    setTimeout(() => this.setState({ success: false }), 2000);
   };
 
-  changeTags = (tag: string) => this.setState(({ tags }) => ({ tags: changeTags(tags, tag) }));
   changeImage = (image: string | ArrayBuffer) => this.setState({ image });
 
   clearError = (error: keyof ErrorsState) =>
@@ -61,8 +49,6 @@ export class AddCardForm extends Component<Props, State> {
         formRef={this.formRef}
         errors={this.state.errors}
         onSubmit={this.onSubmit}
-        tags={this.state.tags}
-        changeTags={this.changeTags}
         image={this.state.image}
         changeImage={this.changeImage}
       />

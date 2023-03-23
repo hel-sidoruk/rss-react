@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import styles from './radio-input.module.scss';
 
-type Props = {
-  error: string;
-};
+type Props = { error: string };
 
 export class RadioInput extends Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
   render() {
     return (
       <div className={styles.field}>

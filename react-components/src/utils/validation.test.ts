@@ -5,7 +5,7 @@ const correctPost: IPost = {
   id: '1',
   text: 'Some title',
   image: 'randomImage',
-  tags: ['Graphics', 'Art'],
+  tag: 'Graphics',
   date: '25.03.2023',
   gender: 'Female',
 };
@@ -14,7 +14,7 @@ const incorrectPost: IPost = {
   id: '1',
   text: '',
   image: 'randomImage',
-  tags: [],
+  tag: '',
   date: '25.03.2023',
   gender: 'Male',
 };

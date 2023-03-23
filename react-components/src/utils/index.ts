@@ -4,5 +4,4 @@ export const randomImage = () =>
 
 export const tags = ['Graphics', 'Design', 'Inspiration', 'Art', 'Modern', 'Vintage'];
 
-export const changeTags = (tags: string[], tag: string) =>
-  tags.includes(tag) ? tags.filter((el) => el !== tag) : [...tags, tag];
+export const initialErrors = { text: '', tag: '', date: '', image: '', check: '', gender: '' };
