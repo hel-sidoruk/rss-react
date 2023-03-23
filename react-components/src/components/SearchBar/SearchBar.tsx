@@ -1,27 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SearchIcon } from '../../Icons';
 import styles from './searchbar.module.scss';
 
-export const SearchBar = () => {
+type Props = { onSubmit: (s: string) => void };
+
+export const SearchBar = ({ onSubmit }: Props) => {
   const [value, setValue] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
 
-  useEffect(() => {
-    const searchbarValue = localStorage.getItem('searchbarValue');
-    if (searchbarValue) setValue(searchbarValue);
-    return () => localStorage.setItem('searchbarValue', value);
-  }, []);
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit(value);
+  };
 
   return (
-    <div className={styles.searchbar}>
+    <form className={styles.searchbar} onSubmit={submit}>
       <input
         value={value}
         onChange={handleChange}
         className={styles.input}
         placeholder="Search..."
       />
-      <SearchIcon className={styles.icon} />
-    </div>
+      <button>
+        <SearchIcon className={styles.icon} />
+      </button>
+    </form>
   );
 };

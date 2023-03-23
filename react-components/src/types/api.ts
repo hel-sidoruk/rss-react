@@ -6,6 +6,7 @@ export interface ApiResponse {
     prev: string | null;
   };
   results: ICharacter[];
+  error?: string;
 }
 
 export interface ICharacter {
