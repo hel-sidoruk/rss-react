@@ -1,0 +1,6 @@
+.posts {
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  gap: 26px;
+  padding: 40px 0;
+}
