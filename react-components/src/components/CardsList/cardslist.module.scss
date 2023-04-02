@@ -3,4 +3,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 26px;
   padding: 40px 0;
+  @media (max-width: 800px) {
+    grid-template-columns: unset;
+  }
 }
